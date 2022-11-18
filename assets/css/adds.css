@@ -1,0 +1,427 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+
+
+/*******           LOGIN     ***********/
+
+
+.sign-up-form {
+	box-sizing: border-box;
+}
+
+.sign-up-form button {
+	border-radius: 20px;
+	border: 1px solid #FF4B2B;
+	background-color: #FF4B2B;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+.sign-up-form button:active {
+	transform: scale(0.95);
+}
+
+.sign-up-form button:focus {
+	outline: none;
+}
+
+.sign-up-form button.ghost {
+	background-color:darkviolet ;
+	border-color: #6a6a77;
+}
+
+.sign-up-form form {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
+}
+
+.sign-up-form input {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
+
+.sign-up-form .container {
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	min-height: 480px;
+}
+
+.sign-up-form .form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	transition: all 0.6s ease-in-out;
+}
+
+.sign-up-form .sign-in-container {
+	left: 0;
+	width: 50%;
+	z-index: 2;
+}
+
+
+.sign-up-form .container.right-panel-active .sign-in-container {
+	transform: translateX(100%);
+}
+
+.sign-up-form .sign-up-container {
+	left: 0;
+	width: 50%;
+	opacity: 0;
+	z-index: 1;
+}
+
+.sign-up-form .container.right-panel-active .sign-up-container {
+	transform: translateX(100%);
+	opacity: 1;
+	z-index: 5;
+	animation: show 0.6s;
+}
+
+@keyframes show {
+	0%, 49.99% {
+		opacity: 0;
+		z-index: 1;
+	}
+	
+	50%, 100% {
+		opacity: 1;
+		z-index: 5;
+	}
+}
+
+.sign-up-form .overlay-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	transition: transform 0.6s ease-in-out;
+	z-index: 100;
+}
+
+.sign-up-form .container.right-panel-active .overlay-container{
+	transform: translateX(-100%);
+}
+
+.sign-up-form .overlay {
+	background: #FF416C;
+	background: -webkit-linear-gradient(to right, #FF4B2B, white);
+	background: linear-gradient(to right, #540077, #FF416C);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+	color: #FFFFFF;
+	position: relative;
+	left: -100%;
+	height: 100%;
+	width: 200%;
+  	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.sign-up-form .container.right-panel-active .overlay {
+  	transform: translateX(50%);
+}
+
+.sign-up-form .overlay-panel {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 40px;
+	text-align: center;
+	top: 0;
+	height: 100%;
+	width: 50%;
+	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.sign-up-form .overlay-left {
+	transform: translateX(-20%);
+}
+
+.sign-up-form .container.right-panel-active .overlay-left {
+	transform: translateX(0);
+}
+
+.sign-up-form .overlay-right {
+	right: 0;
+	transform: translateX(0);
+}
+
+.sign-up-form .container.right-panel-active .overlay-right {
+	transform: translateX(20%);
+}
+
+.radio_but{
+	color: darkviolet;
+	display: inline-flex;
+	float: left;
+	padding: 5px;
+	
+}
+
+/**********     STATUS       ***********/
+table{
+
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px
+    font-family:  "Raleway", sans-serif;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+}
+
+.status-table thead tr {
+    background-color: hsl(270, 100%, 25%);
+    color: #ffffff;
+    text-align: left;
+}
+.status-table th,
+.status-table td {
+    padding: 12px 15px;
+}
+
+.status-table th{
+	text-align: center;
+}
+
+.status-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.status-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.status-table tbody tr:last-of-type {
+    border-bottom: 2px solid  hsl(270, 100%, 25%);
+}
+
+.status-table tbody tr.active-row {
+    font-weight: bold;
+    color:  hsl(122, 90%, 40%);
+}
+
+.status-table tbody tr.reject-row {
+    font-weight: lighter;
+    color:  red;
+
+}
+
+/*********** the apply to jobs part****************/
+/*
+.box{
+	
+	float: left;
+	display: inline;
+	font-size: 18px;
+	border: 1px solid white;
+	margin: 2%;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;;
+	padding: 2%;
+	width: 25%;
+	
+}
+
+.descri{
+	display: block;
+	justify-content: center;
+
+}
+
+
+
+
+
+.mySlides {display: none}
+
+.slideshow-container {
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+  margin-left: 10%;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  
+  width: auto;
+  padding: 16px;
+ 
+  color: midnightblue;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+
+.next {
+  border-radius: 3px 0 0 3px;
+  
+}
+.prev{
+	margin-left: -40px;
+}
+
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+*/
+
+/**********COllapsible part**********/
+
+/*
+
+.job-content{
+	display: block;
+}
+
+
+.collapsible {
+  background-color: palegoldenrod;
+  color: midnightblue;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+  color: whitesmoke;
+}
+
+.collapsible:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+  margin-bottom: -90px;
+  padding-bottom: -90px;
+}
+
+.active:after {
+  content: "\2212";
+
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+  overflow: scroll	;
+  
+}
+
+*/
+
+
+
+/**FILTER TABLE RECRUITER**/
+#myInput {
+  background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+
+#recruiter-table {
+  border-collapse: collapse; /* Collapse borders */
+  width: 100%; /* Full-width */
+  border: 1px solid #ddd; /* Add a grey border */
+  font-size: 18px; /* Increase font-size */
+}
+
+#recruiter-table .accept_msg{
+	color: green;
+	font-weight: bolder;
+	 font-size: 18px
+    font-family:  "Raleway", sans-serif;
+}
+
+
+#recruiter-table .reject_msg{
+	color: red;
+	 font-size: 18px
+    font-family:  "Raleway", sans-serif;
+}
+
+.show_file{
+	display: none;
+}
+
+.accept{
+	 font-size: 18px;
+    font-family:  "Raleway", sans-serif;
+    background-color: lightgoldenrodyellow;
+    color: midnightblue;
+    border: 0.4px dotted midnightblue;
+    border-radius: 10%;
+}
+
+.reject{
+	 font-size: 18px
+    font-family:  "Raleway", sans-serif;
+ 	background-color: palegoldenrod;
+    color: midnightblue; 
+    border: none;
+    border-radius: 10%;  
+}
+
+.accept:hover{
+	background-color: lightgreen;
+	color: hsl(270, 100%, 25%);
+	font-size: bolder;
+}
+
+.reject:hover{
+	background-color: hsl(359, 80%, 60%);;
+	color: palegoldenrod;
+	font-size: bolder;
+}

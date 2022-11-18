@@ -1,0 +1,14 @@
+skills: gis, networking, cryptography, coding, ai, c#, shell, r, css, javascript, sh, security, conda, c++, html, gmail, java, c, ui, python, android, algorithms, machine learning, octave, html5, scripting, windows, access, training, js, sap, programming, computer science, os, visual, certification, information technology, engineering 
+$$$
+college_name: international institute of information technology 
+$$$
+disciplanes: information technology, cse, computer science and engineering 
+$$$
+degree: b.tech, m.tech 
+$$$
+designation: student 
+$$$
+mobile_number: 9500924635 
+$$$
+email: anantharamanannapoorani@gmail.com 
+$$$

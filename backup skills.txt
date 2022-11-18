@@ -1,0 +1,27 @@
+<?php
+
+session_start();
+
+$conn = mysqli_connect('localhost', 'root', '', 'ssd') or die('ERROR: Cannot Connect='.mysql_error($conn));
+
+
+$file="Parser/extracted_Resume_Skills/Resume Subhra.txt";
+
+$searchfor = 'skills';
+
+header('Content-Type: text/plain');
+
+$contents = file_get_contents($file);
+
+$pattern = preg_quote($searchfor, '/');
+
+$pattern = "/^.*$pattern.*\$/m";
+
+if(preg_match_all($pattern, $contents, $matches)){
+ $output= implode("\n", $matches[0]);
+$que="update users set skills='$output' where userid=3;";
+
+mysqli_query($conn,$que) or die("Can't Execute Query...");
+
+
+}

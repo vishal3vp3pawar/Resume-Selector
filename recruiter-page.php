@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Resume Selector</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.ico" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/adds.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="assets/css/button_sub.css">
+
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  
+
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="index.html">Resume Selector</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#resume">Resume</a></li>
+          
+          <li><a class="nav-link scrollto" href="#status">Status</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="getstarted scrollto" href="#login">Sign out</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+
+ <!-- ======= Breadcrumbs ======= -->
+    <section id="resume" class="breadcrumbs">
+      <div class="container">
+        <br>
+        <div class="d-flex justify-content-between align-items-center">
+
+          <h2>Recruiter Page</h2>
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Logged in</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+
+
+<!-- ======= Table status Section ======= -->
+    <section id="status" class="services">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>View Resumes</h2>
+
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for skills..">
+
+          <table class="status-table" id="recruiter-table">
+          <thead>
+              <tr>
+                  <th>Applicant ID</th>
+                  <th>Applicant Name</th>
+                  <th>Resume(pdf)</th>
+                  <th>Skills</th>
+                  <th>Email</th>
+                  <th>Accept/Reject</th>
+              </tr>
+          </thead>
+          <tbody>
+          <form method="post" action="">
+    <?php
+    $conn = mysqli_connect('localhost', 'root', '', 'ssd') or die('ERROR: Cannot Connect='.mysql_error($conn));
+    function getStudent () {
+        global $conn;
+        $query = "SELECT  userid,username,usermail,file_path,parsedfile_path,skills FROM users WHERE resume_status IS NOT NULL;";
+        $result = mysqli_query($conn, $query);
+        $i = 1;
+        while ($row = mysqli_fetch_array($result)) {
+            $sId = $row['userid'];
+            $sName = $row['username'];
+            $sMail=$row['usermail'];
+            $sfpath=$row['file_path'];
+            $sppath=$row['parsedfile_path'];
+            $skill_of_user=$row['skills'];
+          echo"<tr>";
+          echo"<td>{$sId}</td>";
+          echo "<td>{$sName}</td>";
+          echo "<td>Click to view resume</td>";
+          echo "<td>{$skill_of_user}</td>";
+          echo "<td>{$sMail}</td>";
+          echo "<td>";
+
+          echo "<span class='accept_msg'></span><button class='accept' type='submit' name='sAcc' value='{$sId}'>yes</button>";
+          echo "<button class='reject' type='submit' name='sRej' value='{$sId}'>no</button><span class'reject_msg'></span>";
+          echo "</td>";
+          
+          echo"</tr>";
+            $i++;
+        }
+    }
+    if (isset($_POST['sAcc']) && intval($_POST['sAcc'])) {
+      
+      $user_id = (int) $_POST['sAcc'];
+      $value=1;
+      mysqli_query($conn,"update users set app_status='$value' where userid=$user_id");
+      // Do the database update code to set Accept
+  }
+  if (isset($_POST['sRej']) && intval($_POST['sRej'])) {
+      $user_id = (int) $_POST['sRej'];
+      $value=0;
+      mysqli_query($conn,"update users set app_status='$value' where userid=$user_id");
+
+      // Do the database update code to set Reject
+  }
+    getStudent();
+
+?>
+</form> 
+  <!--            <tr>
+    echo "<td><span class="accept_msg"></span><button class="accept">yes</button>&nbsp;<button class="reject">no</button><span class="reject_msg"></span></td>";
+                  <td>1920</td>
+                  <td>Raja</td>
+                  <td></td>
+                  <td>Java</td>
+                  <td>abc@gmail.com</td>
+                  <td>+91-9889123456</td>
+                  <td><span class="accept_msg"></span><button class="accept">yes</button>&nbsp;<button class="reject">no</button><span class="reject_msg"></span></td>
+              </tr>
+              <tr>
+                  <td>2884</td>
+                  <td>Swetha</td>
+                  <td></td>
+                  <td>C++</td>
+                  <td>efg@gmail.com</td>
+                  <td>+91-923459906</td>
+                  <td><span class="accept_msg"></span><button class="accept">yes</button>&nbsp;<button class="reject">no</button><span class="reject_msg"></span></td>
+              </tr>
+
+              <tr>
+                  <td>9986</td>
+                  <td>Parvathi</td>
+                  <td></td>
+                  <td>C#</td>
+                  <td>opo@gmail.com</td>
+                  <td>+91-9989123456</td>
+                   <td><span class="accept_msg"></span><button class="accept">yes</button>&nbsp;<button class="reject">no</button><span class="reject_msg"></span></td>
+              </tr>
+
+              <tr>
+                  <td>2199</td>
+                  <td>Vishwanathan</td>
+                  <td></td>
+                  <td>Java</td>
+                  <td>cop@gmail.com</td>
+                  <td>+91-9833123456</td>
+                  <td><span class="accept_msg"></span><button class="accept">yes</button>&nbsp;<button class="reject">no</button><span class="reject_msg"></span></td>
+              </tr>
+  -->
+              <!-- and so on... -->
+          </tbody>
+        </table>
+          
+      </div>
+
+        <div class="row">
+     </div>
+   </div>
+ </section>
+
+<!--End table-->
+
+
+
+<!-- ======= Table status Section ======= -->
+  
+<!--End table-->
+
+
+
+
+
+
+  <main id="main">
+
+
+  <!--------------------apply--------------------->
+<!--   
+ <section id="apply" class="services">
+   <div class="container">
+
+
+      <div class="section-title">
+        <h2>Apply to jobs</h2>
+        
+      </div>
+
+     <div class="slideshow-container">
+
+       <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+
+      <div class="mySlides">
+         
+
+         <div class="box">
+                <div class="job-content">
+                  <span class="descri">Role: &nbsp; Software1 Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Chennai</span>
+                  <span class="descri">Salary: &nbsp; Not disclosed</span>
+                  <span class="descri">Skills: &nbsp; Java,C,C++</span>
+                </div>
+
+                  <button class="collapsible">Job Description:</button>
+                  <div class="content">
+                    <p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+
+                </div>
+
+                  <button class="apply">Apply</button>
+
+          </div>
+           <div class="box">
+              
+              <div class="job-content">
+                  <span class="descri">Role: &nbsp; Software1 Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Bangalore</span>
+                  <span class="descri">Salary: &nbsp; 60000/month </span>
+                  <span class="descri">Skills: &nbsp; Web development</span>
+              </div>
+
+                  <button class="collapsible">Job Description:</button>
+                  <div class="content">
+                    <p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+
+                </div>
+
+
+                  <button class="apply">Apply</button> 
+          </div>
+           <div class="box">
+                <div class="job-content">
+                  <span class="descri">Role: &nbsp; Software Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Calcutta</span>
+                  <span class="descri">Salary: &nbsp; 12 lpa</span>
+                  <span class="descri">Skills: &nbsp; Mobile development</span>
+                </div>
+
+                  <button class="collapsible">Job Description:</button>
+                  <div class="content">
+                    <p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+
+                </div>
+
+
+                  <button class="apply">Apply</button> 
+          </div>
+          <div class="box">
+
+               <div class="job-content">
+                  <span class="descri">Role: &nbsp; Software Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Bhopal</span>
+                  <span class="descri">Salary: &nbsp; 22 lpa</span>
+                  <span class="descri">Skills: &nbsp; Game development</span>
+                </div>
+
+                  <button class="collapsible">Job Description:</button>
+                  <div class="content">
+                    <p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+
+                
+                </div>
+
+                  <button class="apply">Apply</button> 
+          </div>
+          <div class="box">
+                
+                <div class="job-content">
+                  <span class="descri">Role: &nbsp; Software1 Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Gandhinagar</span>
+                  <span class="descri">Salary: &nbsp; Not disclosed</span>
+                  <span class="descri">Skills: &nbsp; Web development</span>
+                </div>
+
+
+                  <button class="collapsible">Job Description:</button>
+                  <div class="content">
+                    <p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+
+                </div>
+
+                  <button class="apply">Apply</button> 
+          </div>
+          <div class="box">
+                <div class="job-content">
+                  <span class="descri">Role: &nbsp; Software1 Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Cochin</span>
+                  <span class="descri">Salary: &nbsp; 19 lpa</span>
+                  <span class="descri">Skills: &nbsp; Web development</span>
+                </div>
+                
+                  <button class="collapsible">Job Description:</button>
+                  <div class="content">
+                    <p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+
+                </div>
+
+
+                  <button class="apply">Apply</button> 
+          </div>
+
+      </div>
+
+      <div class="mySlides">
+         <div class="box">
+                  <span class="descri">Role: &nbsp; Softwar2e Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Chennai</span>
+              </div>
+               <div class="box">
+                  <span class="descri">Role: &nbsp; Softwar2e Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Chennai</span>
+              </div>
+               <div class="box">
+                  <span class="descri">Role: &nbsp; Softwar2e Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Chennai</span>
+              </div>
+              <div class="box">
+                  <span class="descri">Role: &nbsp; Softwar2e Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Chennai</span>
+              </div>
+               <div class="box">
+                  <span class="descri">Role: &nbsp; Softwar2e Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Chennai</span>
+              </div>
+              <div class="box">
+                  <span class="descri">Role: &nbsp; Softwar2e Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Chennai</span>
+              </div>
+      </div>
+
+      <div class="mySlides">
+         <div class="box">
+                  <span class="descri">Role: &nbsp; Softw3are Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Chennai</span>
+              </div>
+              <div class="box">
+                  <span class="descri">Role: &nbsp; Softw3are Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Chennai</span>
+              </div>
+              <div class="box">
+                  <span class="descri">Role: &nbsp; Softw3are Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Chennai</span>
+              </div>
+              <div class="box">
+                  <span class="descri">Role: &nbsp; Softw3are Engineer</span>
+                  <span class="descri">Company: &nbsp; IBM</span>
+                  <span class="descri">Years: &nbsp; 0+</span>
+                  <span class="descri">Location: &nbsp; Chennai</span>
+              </div>
+      </div>
+
+    
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+      </div>
+      <br>
+
+
+
+    
+
+  </div>
+
+ </section>-->
+
+
+<!--SPACING-->
+<!--
+    <div class="spacing">
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br><div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+         <div class="row"> </div>
+         <br>
+
+    </div>
+
+-->
+ 
+   
+      
+
+      <!--ignore but dont delete-->
+        <button style="display: none;" id="signIn"></button>       
+        <button style="display: none;" id="signUp"></button>
+     
+ 
+
+
+    
+    <!-- ======= Team Section ======= -->
+    <section id="contact" class="team section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Contact us</h2>
+          
+
+
+        <div class="row">
+
+          <div class="col-lg-6">
+
+            <div class="row">
+              
+              <div class="col-mt-4">
+
+                <div class="info-box mt-4">
+                  <h3>Developed by</h3>
+                  <h5 style="color:blueviolet;"> Team ancient debuggers</h5>
+                  <p>Debashish Roy<br>Subhra Chakravorty<br>Jatin Gupta<br>Vishal Pawar<br>Annapoorani Anantharaman</p>
+                </div>
+              </div>
+            
+            </div>
+
+          </div>
+
+          <div class="col-lg-6 mt-4 mt-lg-0">
+            <div class="info-box mt-4">
+                  <i class="bx bx-envelope"></i>
+                  <h3>Email us</h3>
+                  <p>debashish.roy@students.iiit.ac.in<br>
+                     subhra.chakravorty@students.iiit.ac.in<br>
+                     jatin.gupta@students.iiit.ac.in<br>
+                     vishal.pawar@students.iiit.ac.in<br>
+                  annapoorani.a@students.iiit.ac.in</p>
+            </div>
+          </div>
+
+
+          </div>
+        </div>
+
+
+      </div>
+    </section><!-- End Team Section -->
+
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>Resume Selector</h3>
+            <p>Emergency contact:</p>
+            <br>
+            <p>+91-9876543210</p>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#hero">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
+              
+              <li><i class="bx bx-chevron-right"></i> <a href="#login">Login</a></li>
+              
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Possible recruiters</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Possible recruiters</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Game developer</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Analyst</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Security</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Procurement</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Networking</a></li>
+            </ul>
+          </div>
+
+          
+
+        </div>
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script type="text/javascript" src="assets/js/add_js.js"></script>
+
+</body>
+
+</html>

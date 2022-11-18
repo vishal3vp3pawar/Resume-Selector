@@ -1,0 +1,14 @@
+skills: linux, process, design, system, distribution, queries, ai, anaconda, twitter, database, r, css, operating systems, javascript, ios, analytics, sh, php, seaborn, conda, c++, html, gmail, flask, java, c, python, ui, android, data analysis, algorithms, machine learning, windows, ux, numpy, health, healthcare, data analytics, mysql, ino, front-end, pandas, os, y), matplotlib, analysis, visual, sql, engineering 
+$$$
+college_name: iiit hyderabad 
+$$$
+disciplanes: cse 
+$$$
+degree: bachelor of engineering, mtech, bs 
+$$$
+designation: project engineer 
+$$$
+mobile_number: 9589336908 
+$$$
+email: vishalpawar24012204@gmail.com 
+$$$

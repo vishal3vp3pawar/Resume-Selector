@@ -1,0 +1,14 @@
+skills: engineering, sh, technical, computer science, presentation, statistics, os, training, technical skills, javascript, c++, algorithms, ubuntu, r, software engineering, email, mis, sublime, mathematics, gmail, programming, js, communication, cad, java, database, html, certification, billing, ai, math, english, system, c, sql, design, sales, css, mysql, php, windows, lan 
+$$$
+college_name: iiit hyderabad 
+$$$
+disciplanes: computer science and engineering, cse 
+$$$
+degree: m. tech 
+$$$
+designation: software engineer 
+$$$
+mobile_number: 7980298670 
+$$$
+email: schakravorty1999@gmail.com 
+$$$
